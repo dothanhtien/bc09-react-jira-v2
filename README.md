@@ -3,6 +3,7 @@
 ## Installed packages
 - CSS: tailwindcss
 - UI: antd
+- Routing: React router v6
 
 ## Folder Structure
 ```
