@@ -6,3 +6,7 @@ html,
 body {
   font-family: "Roboto", sans-serif;
 }
+
+svg {
+  vertical-align: baseline;
+}

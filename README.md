@@ -2,6 +2,7 @@
 
 ## Installed packages
 - CSS: tailwindcss
+- UI: antd
 
 ## Folder Structure
 ```
