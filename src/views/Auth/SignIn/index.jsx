@@ -1,13 +1,12 @@
 import React from "react";
-import { Typography } from "antd";
+import AuthLayout from "../../../layouts/Auth";
+import SignInForm from "../../../components/auth/SignInForm";
 
 const SignIn = () => {
   return (
-    <div className="container">
-      <Typography.Title className="text-center">
-        Sign in page goes here!
-      </Typography.Title>
-    </div>
+    <AuthLayout>
+      <SignInForm />
+    </AuthLayout>
   );
 };
 
