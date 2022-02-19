@@ -56,7 +56,7 @@ const SignInForm = () => {
           name="email"
           control={control}
           render={({ field }) => (
-            <Form.Item name="email">
+            <Form.Item>
               <Input
                 prefix={<UserOutlined />}
                 placeholder="Email address"
@@ -70,7 +70,7 @@ const SignInForm = () => {
           name="passWord"
           control={control}
           render={({ field }) => (
-            <Form.Item name="password">
+            <Form.Item>
               <Input
                 prefix={<LockOutlined />}
                 type="password"

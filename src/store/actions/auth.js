@@ -14,9 +14,27 @@ export const signIn = (data, callback) => {
 
       if (callback) callback();
     } catch (err) {
-      console.log({ ...err });
+      console.log(err);
       dispatch(
         createAction(actionType.SIGN_IN_FAILURE, err.response.data.message)
+      );
+    }
+  };
+};
+
+export const signUp = (data, callback) => {
+  return async (dispatch) => {
+    dispatch(createAction(actionType.SIGN_UP_REQUEST));
+    try {
+      const res = await authService.signUp(data);
+
+      dispatch(createAction(actionType.SIGN_UP_SUCCESS));
+
+      if (callback) callback();
+    } catch (err) {
+      console.log(err);
+      dispatch(
+        createAction(actionType.SIGN_UP_FAILURE, err.response.data.message)
       );
     }
   };
