@@ -24,11 +24,9 @@ const Header = ({ collapsed, toggle }) => {
   return (
     <Layout.Header className="bg-white" style={{ padding: 0 }}>
       <div className="h-full flex justify-between items-center px-6">
-        <Tooltip placement="bottomLeft" title="Toggle side menu">
-          <Button onClick={toggle}>
-            {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-          </Button>
-        </Tooltip>
+        <Button onClick={toggle}>
+          {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+        </Button>
         <Dropdown overlay={profileMenu} trigger={["click"]}>
           <Tooltip placement="right" title="Your profile and settings">
             <Button shape="circle" className="flex justify-center items-center">

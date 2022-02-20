@@ -14,7 +14,7 @@ const AdminLayout = () => {
   };
 
   return (
-    <Layout className="h-screen">
+    <Layout className="min-h-screen">
       <Sidebar
         collapsed={collapsed}
         setCollapsed={setCollapsed}
@@ -22,7 +22,13 @@ const AdminLayout = () => {
         setHideLogoText={setHideLogoText}
       />
 
-      <Layout className="site-layout">
+      <Layout
+        className="site-layout"
+        style={{
+          marginLeft: collapsed ? 80 : 200,
+          transition: "all 0.2s ease",
+        }}
+      >
         <Header collapsed={collapsed} toggle={toggle} />
 
         <Content />

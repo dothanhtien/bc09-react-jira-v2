@@ -21,6 +21,7 @@ const Sidebar = ({
         setCollapsed(broken);
         setHideLogoText(broken);
       }}
+      className="overflow-auto h-screen fixed left-0 top-0 bottom-0"
     >
       <div className="h-16 flex justify-start items-center">
         <img className="h-full" src={LogoImage} alt="Test" />
@@ -30,7 +31,12 @@ const Sidebar = ({
           </span>
         )}
       </div>
-      <Menu theme="light" mode="inline" defaultSelectedKeys={["1"]}>
+      <Menu
+        theme="light"
+        mode="inline"
+        defaultSelectedKeys={["1"]}
+        className="border-r-0"
+      >
         <Menu.SubMenu key="1" icon={<ProjectOutlined />} title="Projects">
           <Menu.Item key="3">
             Manage
