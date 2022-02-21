@@ -13,6 +13,10 @@ import SignUp from "./views/Auth/SignUp";
 // projects
 import ManageProjects from "./views/Admin/Projects/Manage";
 import NewProject from "./views/Admin/Projects/New";
+import EditProject from "./views/Admin/Projects/Edit";
+
+// tasks
+import ManageTasks from "./views/Admin/Tasks/Manage";
 
 // users
 import ManageUsers from "./views/Admin/Users/Manage";
@@ -63,6 +67,24 @@ const App = () => {
             element={
               <RequireAuth redirectPath="/sign-in">
                 <NewProject />
+              </RequireAuth>
+            }
+          />
+
+          <Route
+            path="/projects/:projectId/edit"
+            element={
+              <RequireAuth redirectPath="/sign-in">
+                <EditProject />
+              </RequireAuth>
+            }
+          />
+
+          <Route
+            path="/projects/:projectId/board"
+            element={
+              <RequireAuth redirectPath="/sign-in">
+                <ManageTasks />
               </RequireAuth>
             }
           />

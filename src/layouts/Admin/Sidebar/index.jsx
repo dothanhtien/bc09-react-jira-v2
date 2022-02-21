@@ -31,12 +31,7 @@ const Sidebar = ({
           </span>
         )}
       </div>
-      <Menu
-        theme="light"
-        mode="inline"
-        defaultSelectedKeys={["1"]}
-        className="border-r-0"
-      >
+      <Menu theme="light" mode="inline" defaultSelectedKeys={["1"]}>
         <Menu.SubMenu key="1" icon={<ProjectOutlined />} title="Projects">
           <Menu.Item key="3">
             Manage
