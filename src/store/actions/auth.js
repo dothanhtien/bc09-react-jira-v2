@@ -26,7 +26,7 @@ export const signUp = (data, callback) => {
   return async (dispatch) => {
     dispatch(createAction(actionType.SIGN_UP_REQUEST));
     try {
-      const res = await authService.signUp(data);
+      await authService.signUp(data);
 
       dispatch(createAction(actionType.SIGN_UP_SUCCESS));
 
