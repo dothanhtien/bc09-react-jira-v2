@@ -35,11 +35,28 @@ export const fetchProjectCategories = async (dispatch) => {
   }
 };
 
+export const fetchProjectDetails = (params) => {
+  return async (dispatch) => {
+    dispatch(createAction(actionType.FETCH_PROJECT_DETAILS_REQUEST));
+    try {
+      const res = await projectService.fetchProjectDetails(params);
+
+      dispatch(
+        createAction(actionType.FETCH_PROJECT_DETAILS_SUCCESS, res.data.content)
+      );
+    } catch (err) {
+      console.log(err);
+      dispatch(createAction(actionType.FETCH_PROJECT_DETAILS_FAILURE));
+    }
+  };
+};
+
 export const createProjectAuthorize = (data, callback) => {
   return async (dispatch) => {
     dispatch(createAction(actionType.CREATE_PROJECT_REQUEST));
     try {
       await projectService.createProjectAuthorize(data);
+      
       dispatch(createAction(actionType.CREATE_PROJECT_SUCCESS));
 
       if (callback) callback();
@@ -51,6 +68,22 @@ export const createProjectAuthorize = (data, callback) => {
           err.response.data.content
         )
       );
+    }
+  };
+};
+
+export const updateProject = (data, callback) => {
+  return async (dispatch) => {
+    dispatch(createAction(actionType.UPDATE_PROJECT_REQUEST));
+    try {
+      await projectService.updateProject(data);
+
+      dispatch(createAction(actionType.UPDATE_PROJECT_SUCCESS));
+
+      if (callback) callback();
+    } catch (err) {
+      console.log(err);
+      dispatch(createAction(actionType.UPDATE_PROJECT_FAILURE));
     }
   };
 };

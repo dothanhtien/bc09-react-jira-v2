@@ -19,6 +19,10 @@ class ProjectService {
     return axiosClient.get("/api/ProjectCategory");
   }
 
+  fetchProjectDetails(params) {
+    return axiosClient.get("/api/Project/getProjectDetail", { params });
+  }
+
   // {
   //   "projectName": "string",
   //   "description": "string",
@@ -27,6 +31,19 @@ class ProjectService {
   // }
   createProjectAuthorize(data) {
     return axiosClient.post("/api/Project/createProjectAuthorize", data);
+  }
+
+  // {
+  //   "id": 0,
+  //   "projectName": "string",
+  //   "creator": 0,
+  //   "description": "string",
+  //   "categoryId": "string"
+  // }
+  updateProject(data) {
+    return axiosClient.put("/api/Project/updateProject", data, {
+      params: { projectId: data.id },
+    });
   }
 
   deleteProject(params) {
