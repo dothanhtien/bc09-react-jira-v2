@@ -28,6 +28,10 @@ class ProjectService {
   createProjectAuthorize(data) {
     return axiosClient.post("/api/Project/createProjectAuthorize", data);
   }
+
+  deleteProject(params) {
+    return axiosClient.delete("/api/Project/deleteProject", { params });
+  }
 }
 
 export default ProjectService;

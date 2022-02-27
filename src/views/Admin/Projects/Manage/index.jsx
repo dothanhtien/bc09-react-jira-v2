@@ -1,10 +1,18 @@
 import React, { useEffect } from "react";
-import { Button, Space, Table, Tag, Typography } from "antd";
-import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import { Button, Modal, Space, Table, Tag, Typography } from "antd";
+import {
+  DeleteOutlined,
+  EditOutlined,
+  ExclamationCircleOutlined,
+} from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { createLoadingSelector } from "../../../../store/selector";
-import { fetchAllProjects } from "../../../../store/actions/project";
+import {
+  deleteProject,
+  fetchAllProjects,
+} from "../../../../store/actions/project";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const ManageProjects = () => {
   const dispatch = useDispatch();
@@ -27,6 +35,40 @@ const ManageProjects = () => {
   useEffect(() => {
     dispatch(fetchAllProjects());
   }, [dispatch]);
+
+  const showConfirmDeleteProjectModal = (id, projectName) => {
+    Modal.confirm({
+      title: "Are you sure to delete this project?",
+      content: (
+        <>
+          The project{" "}
+          <Typography.Text type="danger">{projectName}</Typography.Text> will be
+          permanently deleted.
+        </>
+      ),
+      icon: <ExclamationCircleOutlined />,
+      okText: "Delete",
+      okType: "danger",
+      centered: true,
+
+      onOk: () => {
+        handleDeleteProject(id);
+      },
+    });
+  };
+
+  const handleDeleteProject = (id) => {
+    dispatch(
+      deleteProject({ projectId: id }, () => {
+        dispatch(fetchAllProjects());
+        Swal.fire({
+          icon: "success",
+          title: "Project deleted successfully",
+          showConfirmButton: false,
+        });
+      })
+    );
+  };
 
   return (
     <>
@@ -89,7 +131,7 @@ const ManageProjects = () => {
           title="Action"
           key="action"
           align="center"
-          render={({ id }) => (
+          render={({ id, projectName }) => (
             <Space>
               <Button
                 type="link"
@@ -100,7 +142,7 @@ const ManageProjects = () => {
                 type="link"
                 danger
                 icon={<DeleteOutlined />}
-                onClick={() => console.log("This function is coming soon!")}
+                onClick={() => showConfirmDeleteProjectModal(id, projectName)}
               />
             </Space>
           )}

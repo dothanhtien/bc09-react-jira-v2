@@ -54,3 +54,15 @@ export const createProjectAuthorize = (data, callback) => {
     }
   };
 };
+
+export const deleteProject = (params, callback) => {
+  return async (dispatch) => {
+    try {
+      await projectService.deleteProject(params);
+
+      if (callback) callback();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
