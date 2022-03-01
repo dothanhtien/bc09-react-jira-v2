@@ -5,10 +5,11 @@ import thunk from "redux-thunk";
 import auth from "./reducers/auth";
 import me from "./reducers/me";
 import project from "./reducers/project";
+import task from "./reducers/task";
 import loading from "./reducers/loading";
 import error from "./reducers/error";
 
-const reducer = combineReducers({ auth, me, project, loading, error });
+const reducer = combineReducers({ auth, me, project, task, loading, error });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
