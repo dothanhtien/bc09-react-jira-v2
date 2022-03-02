@@ -1,9 +1,22 @@
 import React from "react";
 import { Avatar, Button, Dropdown, Layout, Menu, Tooltip } from "antd";
 import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { createAction } from "../../../store/actions";
+import { actionType } from "../../../store/actions/type";
+import { ACCESS_TOKEN } from "../../../utils/constants/appConfig";
 
 const Header = ({ collapsed, toggle }) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleSignOut = () => {
+    localStorage.removeItem(ACCESS_TOKEN);
+    dispatch(createAction(actionType.SIGN_IN_SUCCESS, null));
+    navigate("/sign-in");
+  };
+
   const profileMenu = (
     <Menu>
       <Menu.Item key="myProfile" className="px-6">
@@ -11,11 +24,7 @@ const Header = ({ collapsed, toggle }) => {
         <Link to="/my-profile">My profile</Link>
       </Menu.Item>
       <Menu.Divider />
-      <Menu.Item
-        key="signOut"
-        className="px-6"
-        onClick={() => console.log("this function is coming soon!")}
-      >
+      <Menu.Item key="signOut" className="px-6" onClick={handleSignOut}>
         Sign out
       </Menu.Item>
     </Menu>
