@@ -4,26 +4,20 @@ import { Col, Row, Spin, Typography } from "antd";
 import BackButton from "../../../../components/ui/Button/BackButton";
 import TaskListTitle from "../../../../components/tasks/TaskListTitle";
 import TaskItem from "../../../../components/tasks/TaskItem";
+import QuickTask from "../../../../components/tasks/QuickTask";
 import { useDispatch, useSelector } from "react-redux";
-import { createLoadingSelector } from "../../../../store/selector";
 import { fetchProjectDetails } from "../../../../store/actions/project";
 
 const ManageTasks = () => {
   const { projectId } = useParams();
   const dispatch = useDispatch();
-  const fetchingProjectDetailsSelector = createLoadingSelector([
-    "FETCH_PROJECT_DETAILS",
-  ]);
-  const isFetchingProjectDetails = useSelector((state) =>
-    fetchingProjectDetailsSelector(state)
-  );
   const { projectDetails } = useSelector((state) => state.project);
 
   useEffect(() => {
     dispatch(fetchProjectDetails({ id: projectId }));
   }, [dispatch, projectId]);
 
-  if (isFetchingProjectDetails || !projectDetails) {
+  if (!projectDetails) {
     return (
       <div className="h-full flex justify-center items-center">
         <Spin size="large" tip="Loading..." />
@@ -60,6 +54,10 @@ const ManageTasks = () => {
                     );
                   })}
                 </div>
+
+                {listTaskItem.statusName === "BACKLOG" && (
+                  <QuickTask projectId={projectId} />
+                )}
               </div>
             </Col>
           );

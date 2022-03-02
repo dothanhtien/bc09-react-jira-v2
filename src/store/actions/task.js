@@ -15,13 +15,15 @@ export const fetchTaskTypes = async (dispatch) => {
   }
 };
 
-export const createTask = (data) => {
+export const createTask = (data, callback) => {
   return async (dispatch) => {
     dispatch(createAction(actionType.CREATE_TASK_REQUEST));
     try {
       await taskService.createTask(data);
 
       dispatch(createAction(actionType.CREATE_TASK_SUCCESS));
+
+      if (callback) callback();
     } catch (err) {
       dispatch(
         createAction(actionType.CREATE_TASK_FAILURE, err.response.data.content)
