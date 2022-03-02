@@ -22,6 +22,14 @@ class TaskService {
   createTask(data) {
     return axiosClient.post("/api/Project/createTask", data);
   }
+
+  // {
+  //   "taskId": 0,
+  //   "statusId": "string"
+  // }
+  updateTaskStatus(data) {
+    return axiosClient.put("/api/Project/updateStatus", data);
+  }
 }
 
 export default TaskService;

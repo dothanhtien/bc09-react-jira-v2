@@ -31,3 +31,18 @@ export const createTask = (data, callback) => {
     }
   };
 };
+
+export const updateTaskStatus = (data, callback) => {
+  return async (dispatch) => {
+    dispatch(createAction(actionType.UPDATE_TASK_STATUS_REQUEST));
+    try {
+      await taskService.updateTaskStatus(data);
+
+      dispatch(createAction(actionType.UPDATE_TASK_STATUS_SUCCESS));
+
+      if (callback) callback();
+    } catch (err) {
+      dispatch(createAction(actionType.UPDATE_TASK_STATUS_FAILURE));
+    }
+  };
+};
