@@ -46,3 +46,31 @@ export const updateTaskStatus = (data, callback) => {
     }
   };
 };
+
+export const updateTask = (data, callback) => {
+  return async (dispatch) => {
+    dispatch(createAction(actionType.UPDATE_TASK_REQUEST));
+    try {
+      await taskService.updateTask(data);
+      dispatch(createAction(actionType.UPDATE_TASK_SUCCESS));
+
+      if (callback) callback();
+    } catch (err) {
+      dispatch(createAction(actionType.UPDATE_TASK_FAILURE));
+    }
+  };
+};
+
+export const deleteTask = (taskId, callback) => {
+  return async (dispatch) => {
+    dispatch(createAction(actionType.DELETE_TASK_REQUEST));
+    try {
+      await taskService.deleteTask(taskId);
+      dispatch(createAction(actionType.DELETE_TASK_SUCCESS));
+
+      if (callback) callback();
+    } catch (err) {
+      dispatch(createAction(actionType.DELETE_TASK_FAILURE));
+    }
+  };
+};

@@ -9,12 +9,15 @@ import QuickTask from "../../../../components/tasks/QuickTask";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProjectDetails } from "../../../../store/actions/project";
 import { updateTaskStatus } from "../../../../store/actions/task";
+import EditTaskModal from "../../../../components/tasks/EditTaskModal";
 
 const ManageTasks = () => {
   const { projectId } = useParams();
   const dispatch = useDispatch();
   const { projectDetails } = useSelector((state) => state.project);
   const [clonedProjectDetails, setClonedProjectDetails] = useState({});
+  const [selectedTask, setSelectedTask] = useState(null);
+  const [showEditTaskModal, setShowEditTaskModal] = useState(false);
 
   useEffect(() => {
     dispatch(fetchProjectDetails({ id: projectId }));
@@ -69,6 +72,19 @@ const ManageTasks = () => {
     );
   };
 
+  const handleClickTaskItem = (task) => () => {
+    setSelectedTask(task);
+    setShowEditTaskModal(true);
+  };
+
+  const handleCancelEditTask = () => {
+    setShowEditTaskModal(false);
+  };
+
+  const handleUpdateTaskSuccess = () => {
+    dispatch(fetchProjectDetails({ id: projectId }));
+  };
+
   if (!Object.keys(clonedProjectDetails).length) {
     return (
       <div className="h-full flex justify-center items-center">
@@ -99,11 +115,7 @@ const ManageTasks = () => {
 
                   <Droppable droppableId={listTaskItem.statusId}>
                     {(provided, snapshot) => (
-                      <div
-                        ref={provided.innerRef}
-                        {...provided.droppableProps}
-                        className="flex-grow"
-                      >
+                      <div ref={provided.innerRef} {...provided.droppableProps}>
                         {listTaskItem.lstTaskDeTail.map(
                           (listTaskDetailItem, index) => {
                             return (
@@ -111,6 +123,9 @@ const ManageTasks = () => {
                                 key={listTaskDetailItem.taskId}
                                 index={index}
                                 listTaskDetailItem={listTaskDetailItem}
+                                onClick={handleClickTaskItem(
+                                  listTaskDetailItem
+                                )}
                               />
                             );
                           }
@@ -130,6 +145,15 @@ const ManageTasks = () => {
           })}
         </Row>
       </DragDropContext>
+
+      {selectedTask && (
+        <EditTaskModal
+          visible={showEditTaskModal}
+          task={selectedTask}
+          onCancel={handleCancelEditTask}
+          onUpdateSuccess={handleUpdateTaskSuccess}
+        />
+      )}
     </>
   );
 };
