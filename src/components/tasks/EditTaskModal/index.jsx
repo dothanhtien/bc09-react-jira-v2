@@ -3,6 +3,7 @@ import { Button, Modal } from "antd";
 import { CloseOutlined, DeleteOutlined } from "@ant-design/icons";
 import TaskTypeForm from "../Forms/TaskType";
 import ConfirmDeleteTaskModal from "../ConfirmDeleteTaskModal";
+import TaskNameForm from "../Forms/TaskName";
 
 const EditTaskModal = ({ visible, task, onCancel, onUpdateSuccess }) => {
   const [showConfirmDeleteTaskModal, setShowConfirmDeleteTaskModal] =
@@ -23,6 +24,7 @@ const EditTaskModal = ({ visible, task, onCancel, onUpdateSuccess }) => {
         onCancel={onCancel}
         width={980}
         footer={null}
+        keyboard={false}
       >
         <div className="flex justify-between">
           <div>
@@ -44,6 +46,8 @@ const EditTaskModal = ({ visible, task, onCancel, onUpdateSuccess }) => {
             />
           </div>
         </div>
+
+        <TaskNameForm task={task} />
       </Modal>
 
       <ConfirmDeleteTaskModal
