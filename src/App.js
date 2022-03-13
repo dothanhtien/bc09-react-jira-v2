@@ -14,6 +14,7 @@ import SignUp from "./views/Auth/SignUp";
 import ManageProjects from "./views/Admin/Projects/Manage";
 import NewProject from "./views/Admin/Projects/New";
 import EditProject from "./views/Admin/Projects/Edit";
+import ProjectMembers from "./views/Admin/Projects/Member";
 
 // tasks
 import ManageTasks from "./views/Admin/Tasks/Manage";
@@ -76,6 +77,15 @@ const App = () => {
             element={
               <RequireAuth redirectPath="/sign-in">
                 <EditProject />
+              </RequireAuth>
+            }
+          />
+
+          <Route
+            path="/projects/:projectId/members"
+            element={
+              <RequireAuth redirectPath="/sign-in">
+                <ProjectMembers />
               </RequireAuth>
             }
           />

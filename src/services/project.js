@@ -49,6 +49,22 @@ class ProjectService {
   deleteProject(params) {
     return axiosClient.delete("/api/Project/deleteProject", { params });
   }
+
+  // {
+  //   "projectId": 0,
+  //   "userId": 0
+  // }
+  assignUserToProject(data) {
+    return axiosClient.post("/api/Project/assignUserProject", data);
+  }
+
+  // {
+  //   "projectId": 0,
+  //   "userId": 0
+  // }
+  removeUserFromProject(data) {
+    return axiosClient.post("/api/Project/removeUserFromProject", data);
+  }
 }
 
 export default ProjectService;

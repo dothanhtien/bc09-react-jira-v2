@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Button, Form, Input, Typography } from "antd";
 import BackButton from "../../../../components/ui/Button/BackButton";
 import MandatoryLabel from "../../../../components/ui/Label/Mandatory";
@@ -19,6 +19,7 @@ import {
 const EditProject = () => {
   const dispatch = useDispatch();
   const { projectId } = useParams();
+  const navigate = useNavigate();
   const { projectDetails } = useSelector((state) => state.project);
   const updatingProjectSelector = createLoadingSelector(["UPDATE_PROJECT"]);
   const isUpdatingProject = useSelector((state) =>
@@ -131,10 +132,18 @@ const EditProject = () => {
           <Button
             type="primary"
             htmlType="submit"
-            className="mr-4"
+            className="mr-2"
             loading={isUpdatingProject}
           >
             Update
+          </Button>
+          <Button
+            type="default"
+            className="mr-2"
+            onClick={() => navigate(`/projects/${projectId}/members`)}
+            disabled={isUpdatingProject}
+          >
+            Manage members
           </Button>
           <Button
             type="default"

@@ -3,6 +3,7 @@ import { actionType } from "../actions/type";
 const initialState = {
   projects: [],
   projectCategories: [],
+  projectMembers: [],
   projectDetails: null,
 };
 
@@ -13,6 +14,9 @@ const reducer = (state = initialState, { type, payload }) => {
       return { ...state };
     case actionType.FETCH_PROJECT_CATEGORIES_SUCCESS:
       state.projectCategories = payload;
+      return { ...state };
+    case actionType.FETCH_PROJECT_MEMBERS_SUCCESS:
+      state.projectMembers = payload;
       return { ...state };
     case actionType.FETCH_PROJECT_DETAILS_SUCCESS:
       state.projectDetails = payload;
