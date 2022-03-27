@@ -8,7 +8,7 @@ import TaskItem from "../../../../components/tasks/TaskItem";
 import QuickTask from "../../../../components/tasks/QuickTask";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProjectDetails } from "../../../../store/actions/project";
-import { updateTaskStatus } from "../../../../store/actions/task";
+import { updateStatus } from "../../../../store/actions/task";
 import EditTaskModal from "../../../../components/tasks/EditTaskModal";
 
 const ManageTasks = () => {
@@ -16,7 +16,7 @@ const ManageTasks = () => {
   const dispatch = useDispatch();
   const { projectDetails } = useSelector((state) => state.project);
   const [clonedProjectDetails, setClonedProjectDetails] = useState({});
-  const [selectedTask, setSelectedTask] = useState(null);
+  const [selectedTaskId, setSelectedTaskId] = useState(null);
   const [showEditTaskModal, setShowEditTaskModal] = useState(false);
 
   useEffect(() => {
@@ -62,7 +62,7 @@ const ManageTasks = () => {
     setClonedProjectDetails(clonedProject);
 
     dispatch(
-      updateTaskStatus(
+      updateStatus(
         {
           taskId: draggableId,
           statusId: destination.droppableId,
@@ -72,8 +72,8 @@ const ManageTasks = () => {
     );
   };
 
-  const handleClickTaskItem = (task) => () => {
-    setSelectedTask(task);
+  const handleClickTaskItem = (taskId) => () => {
+    setSelectedTaskId(taskId);
     setShowEditTaskModal(true);
   };
 
@@ -124,7 +124,7 @@ const ManageTasks = () => {
                                 index={index}
                                 listTaskDetailItem={listTaskDetailItem}
                                 onClick={handleClickTaskItem(
-                                  listTaskDetailItem
+                                  listTaskDetailItem.taskId
                                 )}
                               />
                             );
@@ -146,10 +146,10 @@ const ManageTasks = () => {
         </Row>
       </DragDropContext>
 
-      {selectedTask && (
+      {selectedTaskId && (
         <EditTaskModal
           visible={showEditTaskModal}
-          task={selectedTask}
+          taskId={selectedTaskId}
           onCancel={handleCancelEditTask}
           onUpdateSuccess={handleUpdateTaskSuccess}
         />

@@ -5,6 +5,12 @@ class TaskService {
     return axiosClient.get("/api/TaskType/getAll");
   }
 
+  fetchTaskDetails(taskId) {
+    return axiosClient.get("/api/Project/getTaskDetail", {
+      params: { taskId },
+    });
+  }
+
   // {
   //     "listUserAsign": [
   //         0
@@ -27,8 +33,24 @@ class TaskService {
   //   "taskId": 0,
   //   "statusId": "string"
   // }
-  updateTaskStatus(data) {
+  updateStatus(data) {
     return axiosClient.put("/api/Project/updateStatus", data);
+  }
+
+  // {
+  //   "taskId": 0,
+  //   "priorityId": 0
+  // }
+  updatePriority(data) {
+    return axiosClient.put("/api/Project/updatePriority", data);
+  }
+
+  // {
+  //   "taskId": 0,
+  //   "description": "string"
+  // }
+  updateDescription(data) {
+    return axiosClient.put("/api/Project/updateDescription", data);
   }
 
   // {

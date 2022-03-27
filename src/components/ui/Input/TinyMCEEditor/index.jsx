@@ -27,7 +27,7 @@ const TinyMCEEditor = ({ value, onEditorChange }) => {
           ],
           toolbar:
             "formatselect | " +
-            "bold italic underline forecolor strikethrough superscript subscript | alignleft aligncenter | " +
+            "bold italic underline forecolor backcolor strikethrough superscript subscript | alignleft aligncenter | " +
             "link | " +
             "alignright alignjustify | bullist numlist outdent indent | " +
             "removeformat | help",

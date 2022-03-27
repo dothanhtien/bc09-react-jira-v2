@@ -15,6 +15,20 @@ export const fetchTaskTypes = async (dispatch) => {
   }
 };
 
+export const fetchTaskDetails = (taskId) => {
+  return async (dispatch) => {
+    dispatch(createAction(actionType.FETCH_TASK_DETAILS_REQUEST));
+    try {
+      const res = await taskService.fetchTaskDetails(taskId);
+      dispatch(
+        createAction(actionType.FETCH_TASK_DETAILS_SUCCESS, res.data.content)
+      );
+    } catch (err) {
+      dispatch(createAction(actionType.FETCH_TASK_DETAILS_FAILURE));
+    }
+  };
+};
+
 export const createTask = (data, callback) => {
   return async (dispatch) => {
     dispatch(createAction(actionType.CREATE_TASK_REQUEST));
@@ -32,17 +46,46 @@ export const createTask = (data, callback) => {
   };
 };
 
-export const updateTaskStatus = (data, callback) => {
+export const updateStatus = (data, callback) => {
   return async (dispatch) => {
     dispatch(createAction(actionType.UPDATE_TASK_STATUS_REQUEST));
     try {
-      await taskService.updateTaskStatus(data);
+      await taskService.updateStatus(data);
 
       dispatch(createAction(actionType.UPDATE_TASK_STATUS_SUCCESS));
 
       if (callback) callback();
     } catch (err) {
       dispatch(createAction(actionType.UPDATE_TASK_STATUS_FAILURE));
+    }
+  };
+};
+
+export const updatePriority = (data, callback) => {
+  return async (dispatch) => {
+    dispatch(createAction(actionType.UPDATE_TASK_PRIORITY_REQUEST));
+    try {
+      await taskService.updatePriority(data);
+
+      dispatch(createAction(actionType.UPDATE_TASK_PRIORITY_SUCCESS));
+
+      if (callback) callback();
+    } catch (err) {
+      dispatch(createAction(actionType.UPDATE_TASK_PRIORITY_FAILURE));
+    }
+  };
+};
+
+export const updateDescription = (data, callback) => {
+  return async (dispatch) => {
+    dispatch(createAction(actionType.UPDATE_TASK_DESCRIPTION_REQUEST));
+    try {
+      await taskService.updateDescription(data);
+      dispatch(createAction(actionType.UPDATE_TASK_DESCRIPTION_SUCCESS));
+
+      if (callback) callback();
+    } catch (err) {
+      dispatch(createAction(actionType.UPDATE_TASK_DESCRIPTION_FAILURE));
     }
   };
 };

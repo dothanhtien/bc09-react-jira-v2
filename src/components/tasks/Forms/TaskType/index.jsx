@@ -39,7 +39,7 @@ const TaskTypeForm = ({ task, onUpdateSuccess }) => {
     clonedTask = {
       ...data,
       ...clonedTask,
-      listUserAsign: task.assigness,
+      listUserAsign: task.assigness.map((assignee) => assignee.id),
       priorityId: task.priorityTask.priorityId,
     };
 

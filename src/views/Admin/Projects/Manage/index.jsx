@@ -93,27 +93,28 @@ const ManageProjects = () => {
               <Button
                 type="link"
                 onClick={() => navigate(`/projects/${id}/board`)}
+                className="whitespace-normal text-left p-0"
               >
                 {projectName}
               </Button>
             );
           }}
           sorter={(a, b) => a.projectName.localeCompare(b.projectName)}
-          width="30%"
+          // width="30%"
         />
         <Table.Column
           title="Category Name"
           dataIndex="categoryName"
           key="categoryName"
           sorter={(a, b) => a.categoryName.localeCompare(b.categoryName)}
-          width="15%"
+          // width="15%"
         />
         <Table.Column
           title="Creator"
           key="creator"
           render={({ creator }) => <>{creator.name}</>}
           sorter={(a, b) => a.creator.name.localeCompare(b.creator.name)}
-          width="15%"
+          // width="15%"
         />
         <Table.Column
           title="Members"
